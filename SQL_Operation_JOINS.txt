@@ -1,0 +1,122 @@
+SHOW databases;
+use sakila;
+select * from customer;
+select store_id,first_name,last_name,email,address_id from customer where not store_id=2;
+select store_id,first_name,last_name,email,address_id from customer where store_id=1;
+select first_name,last_name,email from customer where first_name='dan' limit 20;
+
+select count(email) from customer;
+select count(*) from customer;
+select avg(active) from customer;
+select sum(active) from customer;
+select * from customer where first_name like 'a%';#start whith a end with any chereacher
+select * from customer where first_name like '%a';#start whith any character end with a
+select * from customer where first_name like 'm%a';#start with mand end with a
+select * from customer where first_name like '%e%';#inbetwwen any character is e
+
+select * from customer where first_name like 'a______%';#start with a and atlist 6 character
+select * from customer where customer_id in(1,2,3);
+select * from customer where customer_id not in(1,2,3);
+
+select customer_id from customer where customer_id between 1 and 20;
+#alias
+select first_name as first, last_name as last from customer;#coloum alias
+select c.first_name,c.last_name from customer as c;#table alias
+
+#group by
+select count(customer_id) from customer group by active;
+select * from customer group by active;
+use world;
+select * from country;
+select * from country group by (Continent) having count(population)>10000;
+SELECT DISTINCT Region;
+
+#Union
+#both tables all the rows
+
+use sakila;
+select * from city;
+select * from country;
+
+select city.city_id,city.country_id from city 
+INNER JOIN country
+on city.country_id =country.country_id;
+
+#INNER JOIN
+select city.city_id,country.country_id,city.last_update,country.last_update from city 
+INNER JOIN country
+on city.country_id =country.country_id;
+
+#LEFT JOIN
+select city.city_id,country.country_id,city.last_update,country.last_update from city 
+LEFT JOIN country
+on city.country_id =country.country_id;
+
+#RIGHT JOIN
+select city.city_id,country.country_id,city.last_update,country.last_update from city 
+RIGHT JOIN country
+on city.country_id =country.country_id;
+
+# FULL OUTER JOIN
+SELECT * from city
+LEFT JOIN country
+ON city.country_id =country.country_id
+
+# UNION
+SELECT * from city
+RIGHT JOIN country 
+ON city.country_id =country.country_id;
+
+#NULL VALUES
+USE customer;
+create table customer(id int,first_name varchar(30),last_name varchar(30),salary int);
+create table if not exists customer1(id int auto_increment,first_name varchar(30),last_name varchar(30),salary int,primary key (id));
+select * from customer;
+insert into  customer1(first_name,last_name,salary)
+values
+("krupa","patel",32000),
+("karan","patel",52000),
+("shivam","shah",22000),
+("devangi","patel",12000),
+("dhyani","patel",42000);
+select * from customer1;
+insert into  customer1(first_name,last_name,salary)
+values("cr","patel",NULL);
+
+SELECT * FROM customer1 where salary is null;
+
+SELECT * FROM customer1 where salary is not null;
+
+update customer1 set last_name='patel' where id =3;
+select * from customer1 ;
+delete from customer1 where id=2;
+
+#alter table
+alter table customer1 add emilid varchar(30);
+alter table customer1 add column dob date;
+alter table customer1 drop column emil;
+
+use customer;
+create table test(test_id int auto_increment,
+test_name varchar(30),
+test_email varchar(30),
+test_address varchar(30),
+primary key (test_id));
+
+ show tables;
+select * from test;
+create table if not exists test3(test_id int ,
+test_name varchar(30),
+test_email varchar(30),
+test_address varchar(30),
+test_salary int check (test_salary > 10000)
+);
+
+insert into test3 values
+(1,"krupa","krupa@gmail.com","vadodara",32000),
+(2,"karan","patel988@yahoo.com","ahemdabad",52000),
+(3,"shivam","shivam8990@gmail.com","anand",22000),
+(4,"devangi","patel1276@gmail.com","vadodara",12000),
+(5,"dhyani","patelew@gmail.com","vadodara",42000);
+
+select * from test3;
