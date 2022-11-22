@@ -1,0 +1,21 @@
+show databases;
+use customer;
+create table customer(
+id integer auto_increment,
+first_name varchar(25),
+last_name varchar(25),
+salary integer,
+primary key(id)
+);
+
+select * from customer;
+ ## insert records in table
+
+ insert into customer(first_name,last_name,salary)
+ values
+ ('jalpa','patel',5000),
+ ('xyz','xx1',6000),
+ ('xyz1','xx2',7000),
+ ('xyz2','xx3',8000),
+ ('xyz3','xx4',9000),
+ ('xyz4','xx4',null);
