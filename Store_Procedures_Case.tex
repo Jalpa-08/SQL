@@ -1,0 +1,66 @@
+/* Procedure to find out Square Root of any number*/
+create database N1;
+use N1;
+/* Square_Root of any Number */
+
+delimiter $$
+create procedure Sqrt_Root(a int, out b float)
+begin
+	set b = sqrt(a);
+end $$
+delimiter ;
+
+call Sqrt_Root(64, @b);
+select @b;
+
+/* INOUT Procedure */
+
+Delimiter $$
+create procedure SetCounter(INOUT counter INT, In inc INT )
+begin
+	set counter = counter + inc;
+end $$
+set @counter = 1;
+call SetCounter(@counter, 1);
+call SetCounter(@counter, 3);
+select @counter
+
+/* User Variables */
+
+Delimiter //
+create procedure User_Var()
+begin
+	set @x = 15;
+    set @y = 10;
+    select @x,@y, @x-@y;
+end//
+
+call User_Var();
+
+use N1;
+/* CASE Statement */
+use N1;
+Delimiter $$
+create procedure Student_Case(In S_Sub varchar(30), OUT S_Course varchar(30))
+Begin
+	declare sub varchar(20);
+    select subject into sub from student where S_Sub = subject;
+    
+case sub
+	when 'Computer' then
+		set S_Course = 'B.Tech';
+	when 'History' then
+		set S_Course = 'BA';
+	else
+set S_Course = ' Subject is not available ';
+End case;
+End $$
+
+call Student_Case ('Computer', @S_Course);
+select @S_Course;
+
+call Student_Case ('Hostory', @S_Course);
+select @S_Course;
+
+call Student_Case ('Economics', @S_Course);
+select @S_Course;
