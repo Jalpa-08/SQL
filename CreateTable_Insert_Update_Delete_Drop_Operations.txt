@@ -1,0 +1,71 @@
+# Session 1
+/* 
+1. SQL create Databases
+2. SQL Drop Databases
+3. SQL Create Table
+4. SQL Insert into table
+5. SQL Drop Table
+*/
+
+
+create database customers;
+show databases;
+use customers;
+# drop database customers;
+# create table in databases
+
+create table customer_info1(Id Integer(10), first_name varchar(10), last_name varchar(10));
+show databases;
+show tables;
+select * from cutomer_info1;
+Insert into customer_info1(id, first_name, last_name) values(1,'Jalpa','Patel');
+Insert into customer_info1(id, first_name, last_name) values(2,'xyz','Patel');
+select * from customer_info1;
+UPDATE customer_info1 SET first_name = 'Alfred' WHERE Id = 1;
+
+
+create database customer;
+show databases;
+use customer;
+create table customer(
+id integer auto_increment,
+first_name varchar(25),
+last_name varchar(25),
+salary integer,
+primary key(id)
+);
+select * from customer;
+ ## insert records in table
+ insert into customer(first_name,last_name,salary)
+ values
+ ('jalpa','patel',5000),
+ ('xyz','xx1',6000),
+ ('xyz1','xx2',7000),
+ ('xyz2','xx3',8000),
+ ('xyz3','xx4',9000),
+ ('xyz4','xx4',null);
+ 
+ select * from customer;
+select * from customer where salary is null;
+select * from customer where salary is not null;
+
+## sql update statement to replace null values
+update customer set salary=5000 where id = 6;
+select * from customer;
+
+## sql delete statement
+
+delete from customer where id=5;
+
+## sql alter table
+## add columns in existing table
+
+alter table customer add  email varchar(25);
+
+
+alter table cutomer modify dob year;
+## alter table to drop column
+alter table cutomer drop column email
+
+
+
