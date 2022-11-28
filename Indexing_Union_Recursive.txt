@@ -1,0 +1,108 @@
+Create database index1
+use index1
+
+
+create table if not exists course1 (
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_id)
+)
+
+show index from course1
+
+insert into course1 values(101 , 'fsda' , 'full stack data analytics' , 'Analytics'),
+(102 , 'fsds' , 'full stack data analytics' , 'Analytics'),
+(103 , 'fsds' , 'full stack data science' , 'DS'),
+(104 , 'big data' , 'full stack big data' , 'BD'),
+(105 , 'mern' , 'web dev' , 'mern'),
+(106 , 'blockchain' , 'full stack blockchain' , 'BC'),
+(101 , 'java' , 'full stack java' , 'java'),
+(102 , 'testing' , 'full testing ' , 'testing '),
+(105 , 'cybersecurity' , 'full stack cybersecurity' , 'cybersecurity'),
+(109 , 'c' , 'c language' , 'c'),
+(108 , 'c++' , 'C++ language' , 'language')
+
+
+create table if not exists course2 (
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_id,course_name)
+)
+
+show index from course2
+
+
+create table if not exists course3(
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_desc,course_name,course_tag)
+)
+
+show index from course4
+
+create table if not exists course4 (
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_desc,course_name,course_tag)
+)
+
+insert into course4 values(101 , 'fsda' , 'full stack data analytics' , 'Analytics'),
+(102 , 'fsds' , 'full stack data analytics' , 'Analytics'),
+(103 , 'fsds' , 'full stack data science' , 'DS'),
+(104 , 'big data' , 'full stack big data' , 'BD'),
+(105 , 'mern' , 'web dev' , 'mern'),
+(106 , 'blockchain' , 'full stack blockchain' , 'BC'),
+(101 , 'java' , 'full stack java' , 'java'),
+(102 , 'testing' , 'full testing ' , 'testing '),
+(105 , 'cybersecurity' , 'full stack cybersecurity' , 'cybersecurity'),
+(109 , 'c' , 'c language' , 'c'),
+(108 , 'c++' , 'C++ language' , 'language')
+
+show index from course4
+
+EXPLAIN ANALYZE select * from course4 where  course_id = 106 or course_name = 'fsds'
+
+explain select * from course4 where  course_id = 106
+
+analyze table course4
+
+describe course4
+
+create table if not exists course5(
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+unique index(course_desc,course_name)
+)
+show index from course5
+
+select course_id , course_name from course 
+union 
+select student_id , student_name from student 
+
+with sample_students as (
+select * from course1 where course_id in (101,102,106))
+select * from sample_students where course_tag = 'java' 
+
+with outcoume_corss as (select c.course_id , c.course_name , c.course_desc ,s.student_id,s.student_name ,s.student_course_id from course1 c
+cross  join student s ) select course_id , course_name ,student_id from outcoume_corss where student_id = 301
+
+
+with recursive cte1 as
+(select 1 as n union all select n+1 from cte1 where n<5 )
+select * from cte1
+
+with recursive cte as (
+select 1 as n, 1 as p, -1 as q
+union all
+select n+1, p+2, q+4 from cte where n<5 )
+select * from cte
