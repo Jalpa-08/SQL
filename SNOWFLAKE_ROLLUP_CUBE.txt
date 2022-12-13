@@ -1,0 +1,45 @@
+use bit;
+create table emp(id int,
+`name` varchar(30) not null,
+gender varchar(30) not null,
+salary int not null,
+department varchar(30) not null);
+
+insert into emp values
+(1,'krupa','female',32000,'Sales'),
+(2,'karan','male',42000,'HR'),
+(3,'charchil','male',12000,'IT'),
+(4,'archil','male',32000,'maketing'),
+(5,'binita','female',22000,'finces'),
+(6,'chelsa','female',31000,'Sales'),
+(7,'tyu','male',25000,'HR'),
+(8,'lkj','female',22000,'IT'),
+(9,'lkjh','female',42000,'maketing'),
+(10,'fghjkd','male',15000,'finces'),
+(11,'hefyg','female',33000,'Sales'),
+(12,'podnrb','female',32000,'HR'),
+(13,'tehk','male',18000,'IT'),
+(14,'thdgt','male',20000,'maketing'),
+(15,'ahfhn','female',32000,'finces');
+
+select * from emp;
+
+select department,sum(salary)  from emp group by department;
+
+#ROLLUP modifier used to produce the summary output, including extra rows that represent super-aggregate (higher-level) summary operations.
+#multipule levels of analyze
+select department,sum(salary)  from emp group by  rollup (department) ;
+
+
+select coalesce(department,'all department') as department
+ ,sum(salary)  from emp group by rollup(department);
+ 
+ select coalesce(department,'all department') as department,
+ coalesce(gender,'all gender') as gender
+ ,sum(salary)  from emp group by rollup (department, gender);
+ 
+ 
+ SELECT department ,sum(salary) 
+FROM emp
+GROUP BY
+CUBE(department);
