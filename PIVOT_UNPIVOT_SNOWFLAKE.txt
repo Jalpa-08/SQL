@@ -1,0 +1,65 @@
+/* You can use the PIVOT and UNPIVOT relational operators to
+ change a table-valued expression into another table. */
+
+use pivote
+
+create table order_table12 (
+orderid int ,
+employeeid int ,
+vendorid int );
+
+insert into order_table12 values (1, 258, 1580),
+(2, 254, 1496),
+(3, 257, 1494),
+(4, 261, 1650),
+(5, 251, 1654),
+(6, 253, 1664);
+
+select * from order_table12 ;
+
+select orderid,
+if(employeeid = 254,1,NULL) as "254" ,
+if(employeeid = 257,1,NULL) as emp257 ,
+if(employeeid = 261,1,NULL) as emp261 ,
+if(employeeid = 251,1,NULL) as emp251 ,
+if(employeeid = 253,1,NULL) as emp253 from 
+order_table1 ;
+
+-- Pivot and Unpivot operations are work on sql server or snowflake
+
+Create Table order_table13
+( 
+CourseName varchar(50), 
+CourseCategory varchar(50),
+Price int  
+) 
+
+Insert into order_table13  values('C', 'PROGRAMMING', 5000) 
+Insert into order_table13  values('JAVA', 'PROGRAMMING', 6000) 
+Insert into order_table13  values('PYTHON', 'PROGRAMMING', 8000) 
+Insert into order_table13  values('PLACEMENT 100', 'INTERVIEWPREPARATION', 5000) 
+
+SELECT * FROM order_table13 
+-- Pivot
+SELECT CourseName, PROGRAMMING, INTERVIEWPREPARATION
+FROM order_table13
+PIVOT 
+( 
+SUM(Price) FOR CourseCategory IN (PROGRAMMING, INTERVIEWPREPARATION ) 
+) AS PivotTable 
+
+-- Unpivot
+SELECT CourseName, CourseCategory, Price 
+FROM 
+(
+SELECT CourseName, PROGRAMMING, INTERVIEWPREPARATION FROM geeksforgeeks 
+PIVOT 
+( 
+SUM(Price) FOR CourseCategory IN (PROGRAMMING, INTERVIEWPREPARATION) 
+) AS PivotTable
+) P 
+UNPIVOT 
+( 
+Price FOR CourseCategory IN (PROGRAMMING, INTERVIEWPREPARATION)
+) 
+AS UnpivotTable
