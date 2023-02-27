@@ -1,3 +1,5 @@
+CREATE DATABASE PIVOT_UNPIVOT;
+
 -- Pivot Table
 
 CREATE OR REPLACE TABLE monthly_sales1(empid INT, amount INT, month TEXT);
@@ -26,3 +28,30 @@ SELECT *
     PIVOT(SUM(amount) FOR MONTH IN ('JAN', 'FEB', 'MAR', 'APR'))
       AS p
   ORDER BY EMPID;
+  
+  SELECT * 
+  FROM monthly_sales1
+    PIVOT(SUM(amount) FOR MONTH IN ('JAN', 'FEB', 'MAR', 'APR'))
+      AS p (EMP_ID_renamed, JAN, FEB, MAR, APR)
+  ORDER BY EMP_ID_renamed;
+  
+  SELECT EMPID AS EMP_ID, "'JAN'" AS JANUARY, "'FEB'" AS FEBRUARY, "'MAR'" AS MARCH,
+    "'APR'" AS APRIL
+  FROM monthly_sales1
+    PIVOT(sum(amount) FOR MONTH IN ('JAN', 'FEB', 'MAR', 'APR')) 
+      AS p
+  ORDER BY EMPID;
+
+-- Unpivot Table 
+
+CREATE OR REPLACE TABLE monthly_sales(empid INT, dept TEXT, jan INT, feb INT, mar INT, april INT);
+
+INSERT INTO monthly_sales VALUES
+    (1, 'electronics', 100, 200, 300, 100),
+    (2, 'clothes', 100, 300, 150, 200),
+    (3, 'cars', 200, 400, 100, 50);
+    
+SELECT * FROM monthly_sales
+    UNPIVOT(sales FOR month IN (jan, feb, mar, april))
+    ORDER BY empid;
+    
