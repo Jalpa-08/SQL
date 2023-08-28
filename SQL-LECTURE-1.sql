@@ -1,0 +1,109 @@
+show databases;
+use sakila;
+SELECT * FROM CUSTOMER;
+SELECT FIRST_NAME, LAST_NAME, ADDRESS_ID FROM CUSTOMER;
+SELECT DISTINCT ACTIVE FROM customer;
+SELECT first_name FROM customer WHERE last_name = 'DAVIS';
+SELECT first_name , last_name FROM customer WHERE active = 0;
+SELECT first_name , last_name FROM customer WHERE active = 1;
+SELECT * FROM CUSTOMER WHERE ADDRESS_ID = 10;
+SELECT first_name , last_name, EMAIL FROM customer WHERE 
+ADDRESS_ID < 20;
+SELECT * FROM customer WHERE ADDRESS_ID < 20;
+SELECT * FROM customer WHERE ADDRESS_ID = 20;
+SELECT first_name , last_name FROM customer WHERE 
+ADDRESS_ID BETWEEN 20 AND 25;
+SELECT first_name, email, address_id FROM customer 
+WHERE fiRSt_name = 'IAN' AND last_name = 'STILL';
+UPDATE customer SET first_name = 'KAUSHIK' WHERE last_name ='SMITH';
+UPDATE customer SET first_name = 'AISHWARYA' WHERE last_name ='WILLIAMS';
+UPDATE customer SET first_name = 'jingle' WHERE last_name ='GREY';
+SELECT * FROM CUSTOMER WHERE FIRST_NAME = 'KAUSHIK';
+
+Select store_id, first_name,last_name, email, address_id 
+FROM customer WHERE NOT store_id = 2;
+
+SELECT first_name, last_name,email FROM customer ORDER BY 
+first_name DESC;
+
+SELECT first_name, last_name,email FROM customer ORDER BY first_name;
+
+SELECT first_name, last_name,email FROM customer ORDER BY first_name 
+ASC LIMIT 10;
+
+SELECT first_name, last_name,email, ADDRESS_ID FROM customer 
+ORDER BY ADDRESS_ID;
+
+SELECT * FROM CUSTOMER LIMIT 10;
+
+SELECT first_name, last_name,email,ACTIVE FROM 
+customer WHERE ACTIVE =1 LIMIT 10;
+
+SELECT MIN(address_id) FROM customer;
+SELECT MAX(address_id) FROM customer;
+SELECT SUM(address_id) FROM customer;
+SELECT AVG(address_id) FROM customer;
+SELECT COUNT(email) FROM customer;
+
+SELECT FIRST_NAME, LAST_NAME, EMAIL FROM CUSTOMER 
+WHERE ADDRESS_ID = (SELECT MIN(ADDRESS_ID) FROM CUSTOMER);
+
+SELECT FIRST_NAME, LAST_NAME, EMAIL FROM CUSTOMER WHERE ADDRESS_ID = 5
+
+SELECT COUNT(email) FROM customer;
+SELECT AVG(active) FROM customer;
+
+SELECT SUM(active) FROM customer;
+SELECT * FROM customer WHERE first_name LIKE 'R%';
+SELECT * FROM customer WHERE first_name LIKE '%A';
+SELECT * FROM customer WHERE first_name LIKE '%or%';
+SELECT * FROM customer WHERE Last_name LIKE '%PR%';
+SELECT * FROM customer WHERE first_name LIKE 'a_______%';
+SELECT * FROM customer WHERE first_name LIKE 'a%o';
+SELECT * FROM customer WHERE customer_id IN (1,2,3);
+SELECT * FROM customer WHERE customer_id NOT IN (1,2,3);
+SELECT * FROM customer WHERE customer_id BETWEEN 1 AND 20;
+SELECT * FROM customer WHERE customer_id 
+NOT BETWEEN 1 AND 570;
+SELECT * FROM CUSTOMER;
+SELECT first_name AS first, last_name AS last 
+FROM customer;
+
+SELECT COUNT(customer_id) FROM customer GROUP BY active;
+SELECT COUNT(customer_id),ACTIVE FROM customer 
+GROUP BY active;
+SHOW DATABASES;
+USE WORLD
+
+SELECT * FROM COUNTRY;
+SELECT sum(POPULATION),CONTINENT FROM COUNTRY GROUP BY CONTINENT;
+
+SELECT NAME, REGION,CONTINENT FROM COUNTRY WHERE 
+SURFACEAREA = (SELECT MAX(SURFACEAREA) FROM COUNTRY);
+
+SELECT COUNT(*) FROM COUNTRY
+SELECT MAX(SURFACEAREA) FROM COUNTRY
+
+SELECT * FROM COUNTRY WHERE CONTINENT = 'EUROPE'
+
+SELECT DISTINCT CONTINENT FROM COUNTRY;
+
+SELECT NAME, CONTINENT FROM COUNTRY WHERE 
+SURFACEAREA = (SELECT MIN(SURFACEAREA) FROM COUNTRY);
+
+SELECT NAME, CONTINENT FROM COUNTRY WHERE 
+SURFACEAREA = (SELECT MAX(SURFACEAREA) FROM COUNTRY);
+
+SELECT MAX(SURFACEAREA) FROM COUNTRY;
+
+SELECT * from country group by(continent) having count(region) >6;
+
+SELECT NAME,REGION, SURFACEAREA FROM COUNTRY GROUP BY CONTINENT;
+
+SELECT COUNT(NAME),CONTINENT FROM COUNTRY GROUP BY CONTINENT;
+SELECT CONTINENT, SUM(POPULATION) FROM COUNTRY GROUP BY CONTINENT;
+
+SELECT NAME, CONTINENT FROM COUNTRY WHERE 
+SURFACEAREA = (SELECT MAX(SURFACEAREA) FROM COUNTRY) OR
+POPULATION = (SELECT MAX(POPULATION) FROM COUNTRY) ;
+
